@@ -1,11 +1,12 @@
 "use client"
 
 import { TypeProduto } from "@/types"
-import { error } from "console"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function CadastroProduto(){
+
+    const navigate = useRouter()
 
     const [product, setProduct] = useState<TypeProduto>({
         id: 0,
@@ -19,7 +20,7 @@ export default function CadastroProduto(){
         setProduct({...product, [title]: value})
     }
 
-    const navigate = useRouter()
+    
 
     const submitProduct = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -31,10 +32,11 @@ export default function CadastroProduto(){
         }
 
         try{
-            const response = await fetch('http://localhost:3000/api/dados-produtos', header)
+        const response = await fetch(`http://localhost:3000/api/dados-produtos`, header)
 
             if(response.ok){
-                navigate.push('/produtos')
+                setProduct({id: 0, marca: "",nome: "", preco:0})
+                navigate.push('/produtos/produto')
             } else{
                 alert("Não foi possível cadastrar o produto");
             }
