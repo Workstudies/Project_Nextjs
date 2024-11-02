@@ -1,7 +1,8 @@
 export default function Rodape(){
     return(
-        <footer>
-            <h1>Gabriela de Sousa Reis - RM558830 e Laura Amadeu Soares - RM556690</h1>
-        </footer>
+        <footer className="bg-red-600 text-white text-center p-4 mt-8">
+        <p>Laura Amadeu Soares - RM556690</p>
+        <p>Gabriela De Sousa Reis - RM558830</p>
+      </footer>
     )
 } 
