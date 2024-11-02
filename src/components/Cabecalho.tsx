@@ -4,7 +4,7 @@ import Link from 'next/link';
  
 export default function Cabecalho() {
     return (
-        <header style={{backgroundColor: '#C11D20'}}>
+        <header style={{backgroundColor: '#C11D20'}} className='grow h-15'>
             <Image src={logoPowerHub} alt='LogoPowerHub' width={300} height={100} />
             <nav className="flex space-x-4" style={{backgroundColor: 'white', padding: '15px 0'}}>
                 <Link href="/" className="text-black hover:text-gray-600">Home</Link>
