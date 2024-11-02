@@ -1,7 +1,5 @@
 "use client"
-
 import { TypeProduto } from "@/types"
-import { headers } from "next/headers"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -22,7 +20,7 @@ export default function Produto({ params }: { params: { id: number } }) {
     useEffect(
         () => {
             const chamadaApi = async () => {
-                const response = await fetch(`http://localhost:3001/dados-produtos/${id}`)
+                const response = await fetch(`http://localhost:3000/dados-produtos/${id}`)
                 const data = await response.json()
                 setProduto(data)
                 console.log(data);
@@ -45,7 +43,7 @@ export default function Produto({ params }: { params: { id: number } }) {
                 body: JSON.stringify(produto)
             }
 
-            const response = await fetch(`http://localhost:3001/dados-produtos/${id}`,cabecalho)
+            const response = await fetch(`http://localhost:3000/dados-produtos/${id}`,cabecalho)
             if(response.ok){
                 alert("Produto atualizado com sucesso!")
                 setProduto({id:0,marca:"",nome:"",preco:0})
