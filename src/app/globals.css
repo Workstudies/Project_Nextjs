@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    @apply flex flex-col min-h-screen
+  }

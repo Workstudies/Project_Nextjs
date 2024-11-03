@@ -1,14 +1,14 @@
 import React from 'react';
-
+ 
 interface ConfirmDeleteModalProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
 }
-
+ 
 const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, onClose, onConfirm }) => {
     if (!open) return null;
-
+ 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50">
             <div className="fixed inset-0 bg-black opacity-50" onClick={onClose}></div>
@@ -23,5 +23,6 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ open, onClose, 
         </div>
     );
 };
-
+ 
 export default ConfirmDeleteModal;
+ 

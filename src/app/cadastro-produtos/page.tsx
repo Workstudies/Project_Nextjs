@@ -1,34 +1,34 @@
 "use client"
-
+ 
 import { TypeProduto } from "@/types"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-
+ 
 export default function CadastroProduto(){
-
+ 
     const navigate = useRouter()
-
+ 
     const [product, setProduct] = useState<TypeProduto>({id: 0,marca: "",nome:"",preco:0})
-
+ 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = e.target
         setProduct({...product, [name]: value})
     }
-
-    
-
+ 
+   
+ 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
+ 
         const header = {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(product)
         }
-
+ 
         try{
             const response = await fetch('/dados-produtos', header)
-
+ 
             if(response.ok){
                 setProduct({id: 0, marca: "",nome: "", preco:0})
                 navigate.push('/produtos')
@@ -38,11 +38,11 @@ export default function CadastroProduto(){
         } catch(error){
             console.error("Erro ao realizar cadastro", error)
         }
-
-
+ 
+ 
     }
-
-
+ 
+ 
     return(
         <main className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
     <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6">
@@ -91,6 +91,6 @@ export default function CadastroProduto(){
         </form>
     </div>
 </main>
-
+ 
     )
 }

@@ -38,19 +38,25 @@ export async function PUT(request:Request, {params}:{params:{id:number}}) {
    
 }
  
-export async function DELETE(request: Request, { params }: { params: { id: number } }) {
+export async function DELETE(request: Request, context: { params: { id: number } }) {
+    const { id } = context.params;
+ 
+    console.log("ID Param:", id);
+ 
     try {
         const produtos = await readProducts();
-        const index = produtos.findIndex(p => p.id === params.id);
+        const index = produtos.findIndex(p => p.id == id);
  
         if (index !== -1) {
             produtos.splice(index, 1);
             await writeProducts(produtos);
             return NextResponse.json({ msg: "Produto apagado com sucesso!" });
         } else {
-            return NextResponse.json({ msg: 'Produto não encontrado' }, { status: 404 });
+            return NextResponse.json({ msg: 'Produto não encontrado', id }, { status: 404 });
         }
     } catch (error) {
         return NextResponse.json({ msg: "Erro ao apagar o produto: " + error }, { status: 500 });
     }
 }
+ 
+ 

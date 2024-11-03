@@ -1,48 +1,47 @@
 "use client"
 import { TypeProduto } from "@/types"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-
-export default function Produto({ params }: { params: { id: number } }) {
-
-
+ 
+export default function Produto() {
+ 
+ 
     const navigate = useRouter()
-
+    const { id } = useParams()
+ 
     const [produto, setProduto] = useState<TypeProduto>({
         id:0,
         marca:"",
         nome:"",
         preco:0
     })
-
-    const id = params.id
-
+ 
     useEffect(
         () => {
             const chamadaApi = async () => {
                 const response = await fetch(`http://localhost:3000/dados-produtos/${id}`)
                 const data = await response.json()
+ 
                 setProduto(data)
-                console.log(data);
             }
             chamadaApi()
-        }, [id])
-
+    }, [id])
+ 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
         const {name,value} = e.target
         setProduto({...produto,[name]:value})
     }
-
+ 
     const handleSubmit = async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-
+ 
         try{
             const cabecalho = {
                 method: 'PUT',
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify(produto)
             }
-
+ 
             const response = await fetch(`http://localhost:3000/dados-produtos/${id}`,cabecalho)
             if(response.ok){
                 alert("Produto atualizado com sucesso!")
@@ -53,7 +52,7 @@ export default function Produto({ params }: { params: { id: number } }) {
             }
         }catch(error){
             console.log("Erro ao atualizar o produto",error);
-            
+           
         }
     }
         return(
@@ -98,15 +97,15 @@ export default function Produto({ params }: { params: { id: number } }) {
                 className="w-full bg-red-500 text-white font-semibold py-2 rounded-md hover:bg-red-600 transition duration-200">Editar</button>
         </form>
     </div>
-
+ 
             </main>
         )
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 }

@@ -4,19 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ConfirmDeleteModal from "./DeleteModal";
-
+ 
 export default function Produtos() {
     const [open, setOpen] = useState(false);
     const [idDelete, setIdDelete] = useState(0);
     const [products, setProducts] = useState<TypeProduto[]>([]);
     const navigation = useRouter();
-
+ 
     const idModal = (id: number) => {
         setOpen(true);
         setIdDelete(id);
     };
-
-    // Carregar dados dos produtos da API
+ 
     useEffect(() => {
         const dataApi = async () => {
             try {
@@ -29,7 +28,7 @@ export default function Produtos() {
         };
         dataApi();
     }, []);
-
+ 
     const handleDelete = async (id: number) => {
         try {
             const response = await fetch(`http://localhost:3000/dados-produtos/${id}`, { method: 'DELETE' });
@@ -45,7 +44,7 @@ export default function Produtos() {
             console.error("Falha ao apagar", error);
         }
     };
-
+ 
     return (
         <main className="grow p-5 items-center">
             <table className="w-2/3 m-auto bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden">
