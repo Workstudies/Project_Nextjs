@@ -38,7 +38,7 @@ export default function Home() {
       >
       </section>
  
-      <section className="py-8">
+      <section className="py-8 grow">
         <h2 className="text-2xl font-bold text-center">Marcas</h2>
         <div className="flex justify-center space-x-8 py-4">
           <div className="bg-red-600 text-white p-6 text-center rounded flex flex-col items-center">
